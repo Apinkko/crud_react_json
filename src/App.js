@@ -1,19 +1,28 @@
 import "./App.css";
 import ProductList from "./components/ProductList";
-import { useState } from "react";
-import { Products } from "./data/Product";
+import { useState, useEffect } from "react";
 import ProductCreate from "./components/ProductCreate";
 import axios from "axios";
 import ProductEdit from "./components/ProductEdit";
 
 function App() {
-  const [products, setProducts] = useState(Products);
-  const onCreateProduct = (product) => {
-    setProducts([
-      ...products,
-      { id: Math.round(Math.random() * 77777), ...product },
-    ]);
-    // console.log(product);
+  const [products, setProducts] = useState([]);
+  const fetchProduct = async () => {
+    const response = await axios.get("http://localhost:3005/products");
+    setProducts(response.data);
+  };
+
+  useEffect(() => {
+    fetchProduct();
+  }, []);
+
+  const onCreateProduct = async (product) => {
+    const response = await axios.post(
+      "http://localhost:3005/products",
+      product
+    );
+
+    setProducts([...products, response.data]);
   };
   const onDeleteProduct = (id) => {
     const updatedProduct = products.filter((prod) => {

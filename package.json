@@ -17,7 +17,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "server": "json-server -p 3005 --watch db.json -H 127.0.0.1",
+    "server": "json-server -p 3005 --watch db.json -h localhost",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
