@@ -3,6 +3,7 @@ import ProductList from "./components/ProductList";
 import { useState } from "react";
 import { Products } from "./data/Product";
 import ProductCreate from "./components/ProductCreate";
+import axios from "axios";
 import ProductEdit from "./components/ProductEdit";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       ...products,
       { id: Math.round(Math.random() * 77777), ...product },
     ]);
+    // console.log(product);
   };
   const onDeleteProduct = (id) => {
     const updatedProduct = products.filter((prod) => {

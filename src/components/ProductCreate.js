@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 
 const ProductCreate = ({ propsOncreateProduct }) => {
+  // console.log(propsOncreateProduct);
   const initialState = {
     nama: "",
     deskripsi: "",
