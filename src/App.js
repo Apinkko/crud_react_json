@@ -24,7 +24,8 @@ function App() {
 
     setProducts([...products, response.data]);
   };
-  const onDeleteProduct = (id) => {
+  const onDeleteProduct = async (id) => {
+    await axios.delete(`http://localhost:3005/products/${id}`);
     const updatedProduct = products.filter((prod) => {
       return prod.id != id;
     });
