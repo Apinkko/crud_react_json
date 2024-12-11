@@ -4,11 +4,17 @@ import { useState, useEffect } from "react";
 import ProductCreate from "./components/ProductCreate";
 import axios from "axios";
 import ProductEdit from "./components/ProductEdit";
+import {
+  createProduct,
+  deleteProduct,
+  editProduct,
+  fetchProducts,
+} from "./api/ProductAPI";
 
 function App() {
   const [products, setProducts] = useState([]);
   const fetchProduct = async () => {
-    const response = await axios.get("http://localhost:3005/products");
+    const response = await fetchProducts();
     setProducts(response.data);
   };
 
@@ -17,26 +23,20 @@ function App() {
   }, []);
 
   const onCreateProduct = async (product) => {
-    const response = await axios.post(
-      "http://localhost:3005/products",
-      product
-    );
+    const response = await createProduct(product);
 
     setProducts([...products, response.data]);
     console.log(...products);
   };
   const onDeleteProduct = async (id) => {
-    await axios.delete(`http://localhost:3005/products/${id}`);
+    await deleteProduct(id);
     const updatedProduct = products.filter((prod) => {
       return prod.id != id;
     });
     setProducts(updatedProduct);
   };
   const onEditProduct = async (id, data) => {
-    const response = await axios.put(
-      `http://localhost:3005/products/${id}`,
-      data
-    );
+    const response = await editProduct(id, data);
     const updatedProducts = products.map((prod) => {
       if (prod.id === id) {
         return { ...prod, ...response.data };
