@@ -23,6 +23,7 @@ function App() {
     );
 
     setProducts([...products, response.data]);
+    console.log(...products);
   };
   const onDeleteProduct = async (id) => {
     await axios.delete(`http://localhost:3005/products/${id}`);
@@ -31,10 +32,14 @@ function App() {
     });
     setProducts(updatedProduct);
   };
-  const onEditProduct = (id, data) => {
+  const onEditProduct = async (id, data) => {
+    const response = await axios.put(
+      `http://localhost:3005/products/${id}`,
+      data
+    );
     const updatedProducts = products.map((prod) => {
       if (prod.id === id) {
-        return { ...prod, ...data };
+        return { ...prod, ...response.data };
       } else {
         return prod;
       }
