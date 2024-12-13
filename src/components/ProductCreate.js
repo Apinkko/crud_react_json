@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
+import ProductContext from "../context/products";
 
-const ProductCreate = ({ propsOncreateProduct }) => {
+const ProductCreate = () => {
+  const { onCreateProduct } = useContext(ProductContext);
   // console.log(propsOncreateProduct);
   const initialState = {
     nama: "",
@@ -17,7 +19,7 @@ const ProductCreate = ({ propsOncreateProduct }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    propsOncreateProduct(formData);
+    onCreateProduct(formData);
     setFormData(initialState);
     <div className=""></div>;
   };

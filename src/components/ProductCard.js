@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { AiFillEdit } from "react-icons/ai";
 import ProductEdit from "./ProductEdit";
+import ProductContext from "../context/products";
 
-const ProductCard = ({ product, onDeleteProduct, onEditProduct }) => {
+const ProductCard = ({ product }) => {
+  const { onDeleteProduct, onEditProduct } = useContext(ProductContext);
   const { id, nama, deskripsi, imageURL } = product;
 
   const [jumlahProduk, setJumlahProduk] = useState(0);

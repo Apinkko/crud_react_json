@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import ProductCard from "./ProductCard";
+import ProductContext from "../context/products";
 
-const ProductList = ({ products, onDeleteProduct, onEditProduct }) => {
+const ProductList = ({ onEditProduct, onDeleteProduct }) => {
+  const { products } = useContext(ProductContext);
+  // console.log(onEditProducts);
   return (
     <div className="cards">
       {products.map((product) => {
